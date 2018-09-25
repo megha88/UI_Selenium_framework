@@ -1,0 +1,157 @@
+# Python Version: 3.4.3 is required
+## Comment: This program creates matrices with various dimensions and tries to perform matrix maths operations
+
+##from tkinter import *
+import tkinter as tk
+# To GET the Matrix
+def getMatrix():
+    """
+    This will create the matrix
+
+    Sample Output:
+    Enter the Row count of the Matrix: 2
+    Enter the Column count of the Matrix: 2
+    eg: [[1, 3], [4, 2]]
+
+    """
+    rows = getInteger(input('Enter the Row count of the Matrix: '))
+    columns = getInteger(input('Enter the Column count of the Matrix: '))
+    matrix = []
+    for r in range(rows):
+        matrixCol=[]
+        for c in range(columns):
+            print('Position[',r,'][',c,']')
+            value = getInteger(input('Enter the value: '))
+            matrixCol.append(value)
+        matrix.append(matrixCol)
+    return(matrix)
+
+
+# To ADD the Matrices
+def MatrixAdd():
+        Matrix1 = getMatrix()
+        Matrix2 = getMatrix()
+        assert len(Matrix2) == len(Matrix1), 'Row count of 1st Matrix not eqaual to 2nd Matrix'
+        assert len(Matrix2[0]) == len(Matrix1[0]), 'Column count of 1st Matrix not eqaual to 2nd Matrix'
+        assert len(Matrix2) != 0 or len(Matrix1) != 0 or len(Matrix2[0]) != 0 or len(Matrix1[0]) != 0, 'Column/row count cannot be Zero'
+        MatrixRes = []
+        for row in range(len(Matrix1)):
+                MatrixSum=[]
+                for column in range(len(Matrix1[row])):
+                        MatrixSum.append(Matrix1[row][column]+Matrix2[row][column])
+                MatrixRes.append(MatrixSum)
+        print('1st matrix: ',Matrix1)
+        print('2st matrix: ',Matrix2)
+        ##print('Sum of matrices: ',MatrixRes)
+        tk.messagebox.showinfo(title = 'Matrix Sum', message = MatrixRes)
+
+
+# To SUBTRACT the Matrices
+def MatrixSub():
+        Matrix1 = getMatrix()
+        Matrix2 = getMatrix()
+        assert len(Matrix2) == len(Matrix1), 'Length of 1st Matrix not eqaual to 2nd Matrix'
+        MatrixRes = []
+        for row in range(len(Matrix1)):
+                MatrixSub=[]
+                for column in range(len(Matrix1[row])):
+                        MatrixSub.append(Matrix1[row][column]-Matrix2[row][column])
+                MatrixRes.append(MatrixSub)
+        print('1st matrix: ',Matrix1)
+        print('2st matrix: ',Matrix2)
+        print('Difference of matrices: ',MatrixRes)
+        return MatrixRes
+
+
+def MatrixMultiplication():
+        matrix1 = getMatrix()
+        matrix2 = getMatrix()
+        assert len(matrix1[0]) == len(matrix2), 'Number of columns in 1st Matrix is not eqaual to length of the Matrix'
+        resMatrix = []
+        for i in range(len(matrix1)):
+                MatrixCol=[]
+                for j in range(len(matrix2[0])):
+                        MatrixMul=0
+                        for k in range(len(matrix2)):
+                                MatrixMul+= matrix1[i][k] * matrix2[k][j]
+                        MatrixCol.append(MatrixMul)
+                resMatrix.append(MatrixCol)
+        return resMatrix
+
+
+# To TRANSPOSE the Matrix
+def MatrixTranspose():
+        matrix1 = getMatrix()
+        resMatrix=[]
+        for i in range(len(matrix1)):
+                MatrixTrans=[]
+                for j in range(len(matrix1[i])):
+                        MatrixTrans.append(matrix1[j][i])
+                resMatrix.append(MatrixTrans)
+        return resMatrix
+
+
+#To GET an Integer
+def getScalar():
+    scalar = getInteger(input('Enter the scalar value: '))
+    return(scalar)
+
+######################################################
+
+# TO GET the Scalar Multiplication
+def ScalarMultiplication():
+        matrix1 = getMatrix()
+        scalar = getScalar()
+        res =[]
+        for i in range(len(matrix1)):
+                scalarMul=[]
+                for j in range(len(matrix1[1])):
+                        scalarMul.append(scalar*matrix1[i][j])
+                res.append(scalarMul)
+        return res
+
+######################################################
+
+#Exception Handling for float
+def getFloat(data):
+        try:
+                floatdata = float(data)
+        except:
+                return getFloat(input("Please enter a numerical value: "))
+        else:
+                return floatdata
+
+###############################################
+
+#Exception Handling for integer
+def getInteger(data):
+    """
+    This will create the matrix
+
+    Sample Output:
+    Enter the Row count of the Matrix: 2
+    Enter the Column count of the Matrix: 2
+    eg: [[1, 3], [4, 2]]
+
+    """
+
+
+        try:
+                intdata = int(data)
+        except:
+                return getInteger(input("Please enter a integer value: "))
+        else:
+                return intdata
+
+
+###############################################
+
+# getMatrix()
+MatrixAdd()
+# MatrixSub()
+# MatrixMultiplication()
+# MatrixTranspose()
+# getScalar()
+# ScalarMultiplication()
+# getFloat(2.0)
+# getInteger(5)
